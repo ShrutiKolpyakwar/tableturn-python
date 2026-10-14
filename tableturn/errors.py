@@ -42,3 +42,23 @@ def no_such_table(table_no: str):
         title="Table not found",
         detail=f"Table '{table_no}' does not exist.",
     )
+
+def party_too_big(max_covers: int):
+    error = TableTurnError(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        error_type="party-too-big",
+        title="Party too big",
+        detail=f"Maximum party size is {max_covers}.",
+    )
+    error.detail["max_covers"] = max_covers
+    return error
+
+
+def no_such_party(party_id: str):
+    return TableTurnError(
+        status_code=status.HTTP_404_NOT_FOUND,
+        error_type="no-such-party",
+        title="Party not found",
+        detail=f"Party '{party_id}' does not exist.",
+    )
+  

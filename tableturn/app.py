@@ -12,8 +12,8 @@ from tableturn.handlers import (
 )
 from tableturn.routers.tables import router as tables_router
 from tableturn.services.seed import initialize_database
-
-
+from tableturn.routers.parties import router as parties_router
+from tableturn.routers.waitlist import router as waitlist_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     initialize_database()
@@ -55,7 +55,8 @@ def create_app():
         )
 
     app.include_router(tables_router)
-
+    app.include_router(parties_router)
+    app.include_router(waitlist_router)
     return app
 
 
